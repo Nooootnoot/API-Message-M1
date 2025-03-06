@@ -1,0 +1,19 @@
+docker compose up
+
+docker exec -it mongo-container mongosh -u root -p rootpassword --authenticationDatabase admin
+
+./mvwn spring-boot:run
+
+aller sur http://localhost:8080/hello/testConnection
+
+pour créer un fichier test : ouvrir terminal : 
+
+curl -X POST http://localhost:8080/api/messages -H "Content-Type: application/json" -d '{
+  "texte": "Ceci est un message test.",
+  "sujet": "Test de création",
+  "etudiantId": 12345
+}'
+
+normalement la réponse est : "id":"67c95f5ef9fe1b5956d89237","texte":"Ceci est un message test.","lu":false,"sujet":"Test de création","etudiantId":12345,"dateCreation":"2025-03-06T09:39:58.783631584"}
+un truc du genre, puis sur mongosh faire : db.messages.find(); et ça devrait renvoyer l'élément.
+
